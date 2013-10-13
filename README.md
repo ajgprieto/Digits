@@ -1,7 +1,7 @@
 ![screenshot](https://raw.github.com/ajgprieto/Digits/Attempt-1/public/images/screenshot.jpg)
 
 
-Digits
+DigitsMockup
 ======
 
 A database of digits.
