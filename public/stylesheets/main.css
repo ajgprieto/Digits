@@ -1,3 +1,5 @@
-body {
-  padding-top: 70px;  /* Move body of page below navbar. */
+.header {
+  background-image: url('../images/keypad.jpg');
+  background-size: cover;
+  height: 350px;
 }

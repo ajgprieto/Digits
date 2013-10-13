@@ -2,28 +2,29 @@ package controllers;
 
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.Index;
-import views.html.Page1;
+import views.html.Home;
+import views.html.NewContact;
 
 /**
  * Implements the controllers for this application.
  */
 public class Application extends Controller {
 
+ 
   /**
-   * Returns the home page. 
-   * @return The resulting home page. 
+   * Returns home, a page that contains sample contacts.
+   * @return The Home.
    */
-  public static Result index() {
-    return ok(Index.render("Welcome to the home page."));
+  public static Result home() {
+    return ok(Home.render());
   }
   
   /**
-   * Returns page1, a simple example of a second page to illustrate navigation.
-   * @return The Page1.
+   * Returns newcontact, a page that simulates an add contact page.
+   * @return The NewContact.
    */
-  public static Result page1() {
-    return ok(Page1.render("Welcome to Page1."));
-    
+  public static Result newcontact() {
+    return ok(NewContact.render());
   }
+  
 }
