@@ -22,7 +22,7 @@ public class ContactDB {
    * @param contact the contact to be added
    */
   public static void add(ContactFormData contact) {
-    Contact newContact = new Contact(contact.firstName, contact.lastName, contact.telephone);
+    Contact newContact = new Contact(contact.firstName, contact.lastName, contact.telephone, contact.address);
     contactList.add(newContact);
   }
   

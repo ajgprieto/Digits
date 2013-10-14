@@ -11,6 +11,8 @@ public class Contact {
   private String lastName;
   /**The telephone number.*/
   private String telephone;
+  /**The address.*/
+  private String address;
   
   /**
    * public Contact(String first, String last, String phNumber
@@ -20,11 +22,13 @@ public class Contact {
    * @param first the first name
    * @param last the last name
    * @param phNumber the phone number
+   * @param address, the address 
    */
-  public Contact(String first, String last, String phNumber) {
+  public Contact(String first, String last, String phNumber, String address) {
     this.firstName = first;
     this.lastName = last;
     this.telephone = phNumber;
+    this.address = address;
   }
   
   /**
@@ -59,4 +63,13 @@ public class Contact {
   public String getNumber() {
     return telephone;
   }
+  
+  /**
+   * 
+   * @return the address
+   */
+  public String getAddress() {
+    return address;
+  }
+  
 }
