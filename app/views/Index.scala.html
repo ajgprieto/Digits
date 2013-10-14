@@ -1,3 +1,5 @@
+@(contacts: List[Contact])
+
 @Main("Home") {
 <div class="container">
   <table class="table table-bordered">
@@ -9,23 +11,13 @@
       </tr>
     </thead>
     <tbody>
+      @for(contact <- contacts) {
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>808-123-4567</td>
+        <td>@contact.getFirstName()</td>
+        <td>@contact.getLastName()</td>
+        <td>@contact.getNumber()</td> 
     </tbody>
-    <tbody>
-      <tr>
-        <td>Jane</td>
-        <td>Smith</td>
-        <td>808-123-4567</td>
-    </tbody>
-    <tbody>
-      <tr>
-        <td>Joe</td>
-        <td>Jones</td>
-        <td>808-123-4567</td>
-    </tbody>
+    }
   </table>
 </div>
 }
