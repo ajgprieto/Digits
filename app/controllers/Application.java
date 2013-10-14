@@ -1,10 +1,12 @@
 package controllers;
 
+import models.Contact;
+import models.ContactDB;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.formdata.ContactFormData;
-import views.html.Home;
+import views.html.Index;
 import views.html.NewContact;
 
 /**
@@ -13,12 +15,12 @@ import views.html.NewContact;
 public class Application extends Controller {
 
   /**
-   * Returns home, a page that contains sample contacts.
+   * Returns Index, a page that contains sample contacts.
    * 
    * @return The Home.
    */
-  public static Result home() {
-    return ok(Home.render());
+  public static Result index() {
+    return ok(Index.render(ContactDB.getContacts()));
   }
 
   /**
@@ -45,6 +47,7 @@ public class Application extends Controller {
     }
     else {
       ContactFormData data = formData.get();
+      ContactDB.add(data);
       System.out.println("OK: " + data.firstName + " " + data.lastName + " " + data.telephone);
       return ok(NewContact.render(formData));
     }
