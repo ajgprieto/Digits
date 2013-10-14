@@ -12,33 +12,42 @@ import views.html.NewContact;
  */
 public class Application extends Controller {
 
- 
   /**
    * Returns home, a page that contains sample contacts.
+   * 
    * @return The Home.
    */
   public static Result home() {
     return ok(Home.render());
   }
-  
+
   /**
    * Returns newcontact, a page that simulates an add contact page.
+   * 
    * @return The NewContact.
    */
   public static Result newContact() {
     Form<ContactFormData> formData = Form.form(ContactFormData.class);
     return ok(NewContact.render(formData));
   }
-  
+
   /**
-   * Posts the contact info to the Play console. 
+   * Posts the contact info to the Play console.
+   * 
    * @return contact info to the play console.
    */
   public static Result postContact() {
     Form<ContactFormData> formData = Form.form(ContactFormData.class).bindFromRequest();
-    ContactFormData data = formData.get();
-    System.out.println("OK: " + data.firstName + " " + data.lastName + " " + data.telephone);
-    return ok(NewContact.render(formData));
+
+    if (formData.hasErrors()) {
+      System.out.println("Errors Found");
+      return badRequest(NewContact.render(formData));
+    }
+    else {
+      ContactFormData data = formData.get();
+      System.out.println("OK: " + data.firstName + " " + data.lastName + " " + data.telephone);
+      return ok(NewContact.render(formData));
+    }
   }
-  
+
 }
