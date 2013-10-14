@@ -1,4 +1,4 @@
-![screenshot](https://raw.github.com/ajgprieto/Digits/Attempt-1-1/public/images/screenshot.png)
+![screenshot](https://raw.github.com/ajgprieto/Digits/Attempt-1-1-1/public/images/screenshot2.png)
 
 
 
@@ -10,6 +10,7 @@ A database of digits.
 Overview
 ======
 Simulates an add contact type page.  Data entered into the New Contact tab will be printed out to the play console.
+Checks to see that data is not empty and telephone number contains 12 characters.
 
 Installation
 ==========
