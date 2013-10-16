@@ -34,6 +34,12 @@ public class Application extends Controller {
     Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
     return ok(NewContact.render(formData));
   }
+  
+  public static Result deleteContact(long id) {
+    ContactDB.delete(id);
+    return ok(Index.render(ContactDB.getContacts()));
+  }
+  
 
   /**
    * Posts the contact info to the Play console and adds it to the contact database.
@@ -50,7 +56,7 @@ public class Application extends Controller {
     else {
       ContactFormData data = formData.get();
       ContactDB.add(data);
-      System.out.println("OK: " + data.firstName + " " + data.lastName + " " + data.telephone);
+      System.out.println("OK: " + data.id + " " + data.firstName + " " + data.lastName + " " + data.telephone);
       return ok(NewContact.render(formData));
     }
   }

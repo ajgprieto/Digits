@@ -15,6 +15,7 @@
         <td>@contact.getLastName()</td>
         <td>@contact.getNumber()</td>
         <td><a href="@routes.Application.newContact(contact.getID())">Edit</a>
+        <td><a href="@routes.Application.deleteContact(contact.getID())">Delete</a>
         <td>
       </tr>
       }

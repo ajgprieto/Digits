@@ -36,6 +36,11 @@ public class ContactDB {
       contacts.put(formData.id, newContact);
     }
   }
+  
+  public static void delete(long id) {
+    contacts.remove(id);
+  }
+  
 
   /**
    * Returns the contact that belongs to the ID.
