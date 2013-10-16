@@ -2,6 +2,7 @@ package views.formdata;
 
 import java.util.ArrayList;
 import java.util.List;
+import models.Contact;
 import play.data.validation.ValidationError;
 
 /**
@@ -22,6 +23,27 @@ public class ContactFormData {
 
   /** The telephone number. */
   public String telephone = "";
+  
+  /**The contact's id.*/
+  public long id;
+  
+  /**
+   * Empty, no argument constructor.
+   */
+  public ContactFormData() {
+  }
+  
+  /**
+   * Creates a ContactFormData from the given Contact information.
+   * 
+   * @param contact The contact with information that creates the ContactFormData.
+   */
+  public ContactFormData(Contact contact) {
+    this.id = contact.getID();
+    this.firstName = contact.getFirstName();
+    this.lastName = contact.getLastName();
+    this.telephone = contact.getNumber();
+  }
   
   /**
    * public List<ValidationError> validate()

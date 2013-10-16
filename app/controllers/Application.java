@@ -25,15 +25,18 @@ public class Application extends Controller {
   /**
    * Returns newcontact, a page that simulates an add contact page.
    * 
+   * @param id the id of the Contact
+   * 
    * @return The NewContact.
    */
-  public static Result newContact() {
-    Form<ContactFormData> formData = Form.form(ContactFormData.class);
+  public static Result newContact(long id) {
+    ContactFormData data = (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(id));
+    Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
     return ok(NewContact.render(formData));
   }
 
   /**
-   * Posts the contact info to the Play console.
+   * Posts the contact info to the Play console and adds it to the contact database.
    * 
    * @return contact info to the play console.
    */

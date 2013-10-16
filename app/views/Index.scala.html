@@ -1,6 +1,4 @@
-@(contacts: List[Contact])
-
-@Main("Home") {
+@(contacts: List[Contact]) @Main("Home") {
 <div class="container">
   <table class="table table-bordered">
     <thead>
@@ -15,9 +13,11 @@
       <tr>
         <td>@contact.getFirstName()</td>
         <td>@contact.getLastName()</td>
-        <td>@contact.getNumber()</td> 
-    </tbody>
-    }
+        <td>@contact.getNumber()</td>
+        <td><a href="@routes.Application.newContact(contact.getID())">Edit</a>
+        <td>
+      </tr>
+      }
   </table>
 </div>
 }
