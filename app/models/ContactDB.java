@@ -36,6 +36,15 @@ public class ContactDB {
       contacts.put(formData.id, newContact);
     }
   }
+  
+  /**
+   * deletes the given contact id from the contacts list.
+   * 
+   * @param id the  id of the contact to be deleted.
+   */
+  public static void delete(long id) {
+    contacts.remove(id);
+  }
 
   /**
    * Returns the contact that belongs to the ID.
@@ -51,6 +60,7 @@ public class ContactDB {
     }
     return contact;
   }
+  
 
   /**
    * public static List<Contact> getContacts()
