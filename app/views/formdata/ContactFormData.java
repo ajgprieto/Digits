@@ -27,6 +27,9 @@ public class ContactFormData {
   /**The contact's id.*/
   public long id;
   
+  /**The telephone type.*/
+  public String telephoneType = "";
+  
   /**
    * Empty, no argument constructor.
    */
@@ -43,6 +46,7 @@ public class ContactFormData {
     this.firstName = contact.getFirstName();
     this.lastName = contact.getLastName();
     this.telephone = contact.getNumber();
+    this.telephoneType = contact.getTelephoneType();
   }
   
   /**
@@ -67,6 +71,9 @@ public class ContactFormData {
     }
     if (telephone.length() != NUM_DIGITS) {
       error.add(new ValidationError("telephone", "Telephone Number must be 12 characters long."));
+    }
+    if (telephoneType == null) {
+      error.add(new ValidationError("telephoneType", "The telephone type cannot be empty."));
     }
     return error.isEmpty() ? null : error;
   }

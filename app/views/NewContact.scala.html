@@ -1,7 +1,8 @@
-@(contactForm: Form[views.formdata.ContactFormData])
+@(contactForm: Form[views.formdata.ContactFormData],
+  telephoneTypes: Map[String, Boolean])
 
- @import helper._ 
  @import bootstrap3._ 
+ @import helper._
  
  @Main("Home") {
     @form(routes.Application.postContact(), 'class -> "form-horizontal") {
@@ -23,6 +24,12 @@
            label="Phone",
            placeholder="Telephone",
            help="Your Phone Number.")
+           
+    @bootstrap3.select(contactForm("telephoneType"),
+           label="Telephone Type",
+           optionMap=telephoneTypes,
+           isMultiple=false,
+           help="Select your telephone type.")
 
 <div class="form-group">
   <div class="col-sm-offset-2 col-sm-10">

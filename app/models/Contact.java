@@ -13,6 +13,8 @@ public class Contact {
   private String telephone;
   /** Contact's id. */
   private long id;
+  /**The telephone type.*/
+  private String telephoneType;
 
   /**
    * public Contact(String first, String last, String phNumber
@@ -23,12 +25,14 @@ public class Contact {
    * @param first the first name
    * @param last the last name
    * @param phNumber the phone number
+   * @param telephoneType the telephone type
    */
-  public Contact(long id, String first, String last, String phNumber) {
+  public Contact(long id, String first, String last, String phNumber, String telephoneType) {
     this.id = id;
     this.firstName = first;
     this.lastName = last;
     this.telephone = phNumber;
+    this.telephoneType = telephoneType;
   }
 
   /**
@@ -101,5 +105,23 @@ public class Contact {
    */
   public void setID(long val) {
     this.id = val;
+  }
+  
+  /**
+   * Returns the telephone type.
+   * 
+   * @return the telephone type
+   */
+  public String getTelephoneType() {
+    return telephoneType;
+  }
+  
+  /**
+   * Sets the telephone type.
+   * 
+   * @param telephoneType the telephone type to be set
+   */
+  public void setTelephoneType(String telephoneType) {
+    this.telephoneType = telephoneType;
   }
 }
