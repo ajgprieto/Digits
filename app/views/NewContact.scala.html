@@ -20,16 +20,13 @@
            label="Last",
            placeholder="Last Name",
            help="Your Last Name.")
-    @text(contactForm("telephone"),
-           label="Phone",
-           placeholder="Telephone",
-           help="Your Phone Number.")
-           
-    @bootstrap3.select(contactForm("telephoneType"),
-           label="Telephone Type",
-           optionMap=telephoneTypes,
-           isMultiple=false,
-           help="Select your telephone type.")
+   
+    @telephone(contactForm("telephone"),
+                label="Phone",
+                placeholder="Please enter your phone number.",
+                contactForm("telephoneType"),
+                optionMap=telephoneTypes,
+                isMultiple=false)
 
 <div class="form-group">
   <div class="col-sm-offset-2 col-sm-10">
