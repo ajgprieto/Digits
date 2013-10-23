@@ -1,7 +1,5 @@
 package controllers;
 
-
-import java.util.Map;
 import models.ContactDB;
 import play.data.Form;
 import play.mvc.Controller;
@@ -35,8 +33,7 @@ public class Application extends Controller {
   public static Result newContact(long id) {
     ContactFormData data = (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(id));
     Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
-    Map<String, Boolean> phoneTypes = TelephoneTypes.getTypes(data.telephoneType);
-    return ok(NewContact.render(formData, phoneTypes));
+    return ok(NewContact.render(formData, TelephoneTypes.getTypes(data.telephoneType)));
   }
 
   /**
@@ -54,8 +51,9 @@ public class Application extends Controller {
     else {
       ContactFormData data = formData.get();
       ContactDB.add(data);
-      System.out.println("OK: " + data.firstName + " " + data.lastName + " " + data.telephone);
-      return ok(NewContact.render(formData, TelephoneTypes.getTypes()));
+      System.out.println("OK: " + data.firstName + " " + data.lastName + " " + data.telephone + " "
+          + data.telephoneType);
+      return ok(NewContact.render(formData, TelephoneTypes.getTypes(data.telephoneType)));
     }
   }
 

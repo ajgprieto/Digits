@@ -1,8 +1,6 @@
 package views.formdata;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,13 +10,8 @@ import java.util.Map;
  */
 public class TelephoneTypes {
 
-  private static List<String> phoneTypes = new ArrayList<>();
+  private static String [] phoneTypes = {"Mobile", "Home", "Office"};
   
-  static {
-    phoneTypes.add("Mobile");
-    phoneTypes.add("Home");
-    phoneTypes.add("Office");
-  }
   
   /**
    * Creates a Map of the different phone types that are available.
@@ -27,8 +20,8 @@ public class TelephoneTypes {
    */
   public static Map<String, Boolean> getTypes() {
     Map<String, Boolean> phones = new HashMap<>();
-    for (int x = 0; x < phoneTypes.size(); x++) {
-      phones.put(phoneTypes.get(x), false);
+    for (int x = 0; x < phoneTypes.length; x++) {
+      phones.put(phoneTypes[x], false);
     }
     return phones;
   }

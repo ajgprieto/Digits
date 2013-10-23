@@ -72,8 +72,8 @@ public class ContactFormData {
     if (telephone.length() != NUM_DIGITS) {
       error.add(new ValidationError("telephone", "Telephone Number must be 12 characters long."));
     }
-    if (telephoneType == null) {
-      error.add(new ValidationError("telephoneType", "The telephone type cannot be empty."));
+    if (!TelephoneTypes.isType(telephoneType)) {
+      error.add(new ValidationError("telephoneType", "The telephone type is invalid."));
     }
     return error.isEmpty() ? null : error;
   }

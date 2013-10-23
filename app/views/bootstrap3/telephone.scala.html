@@ -14,11 +14,11 @@ Boolean)
 <div class="col-sm-3">
   <select class="form-control"
           id="@typeField.id"
-          name="@if(isMultiple) {@()typeField.name + "[]")} else {@typeField.name}"
+          name="@if(isMultiple) {@(typeField.name + "[]")} else {@typeField.name}"
           @if(isMultiple) {multiple="multiple"}>
           @if(!isMultiple) {<option class="blank" value="">Please select a type.</option>}
     @for((optionName, isSelected) <- optionMap) {
-    <option id="@optionName" value="optionName"@if(isSelected) {selected}>@optionName</option>}
+    <option id="@optionName" value="optionName" @if(isSelected) {selected}>@optionName</option>}
   </select>
   <span class="help-block">@{typeField.error.map { error => error.message}}</span>
 </div>
