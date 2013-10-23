@@ -6,10 +6,8 @@
  
  @Main("Home") {
     @form(routes.Application.postContact(), 'class -> "form-horizontal") {
-        <input type="hidden"
-                name="@contactForm("id").name"
-                id="@contactForm("id").id"
-                value="@contactForm("id").value">
+    
+     @hidden(contactForm("id"))
 
 
     @text(contactForm("firstName"), 
