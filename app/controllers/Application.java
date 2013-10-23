@@ -53,7 +53,7 @@ public class Application extends Controller {
       ContactDB.add(data);
       System.out.println("OK: " + data.firstName + " " + data.lastName + " " + data.telephone + " "
           + data.telephoneType);
-      return ok(NewContact.render(formData, TelephoneTypes.getTypes(data.telephoneType)));
+      return ok(NewContact.render(formData, TelephoneTypes.getTypes()));
     }
   }
 

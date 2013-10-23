@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class TelephoneTypes {
 
-  private static String [] phoneTypes = {"Mobile", "Home", "Office"};
+  private static String [] phoneTypes = {"Mobile", "Home", "Work"};
   
   
   /**
