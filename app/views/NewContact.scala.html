@@ -1,10 +1,10 @@
 @(contactForm: Form[views.formdata.ContactFormData],
-  telephoneTypes: Map[String, Boolean])
+  telephoneTypes: Map[String, Boolean], isLoggedIn: Boolean, userInfo: UserInfo)
 
  @import bootstrap3._ 
  @import helper._
  
- @Main("Home") {
+ @Main("Home", isLoggedIn, userInfo) {
     @form(routes.Application.postContact(), 'class -> "form-horizontal") {
     
      @hidden(contactForm("id"))

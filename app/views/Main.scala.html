@@ -1,4 +1,4 @@
-@(page: String)(content: Html)
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo)(content: Html)
 
 <!DOCTYPE html>
 
@@ -29,12 +29,21 @@
           <!--  Display three horizontal lines when navbar collapsed. -->
           <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">DigitsTelephone-1</a>
+        <a class="navbar-brand" href="/">DigitsTelephone-1</a>
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li><a href="@routes.Application.index()">Home</a></li>
-          <li><a href="@routes.Application.newContact()">New Contact</a></li>
+           @if(isLoggedIn) {
+            <li class="@("active".when(page == "Profile"))"><a href="@routes.Application.newContact()">NewContact</a></li>
+          }
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          @if(isLoggedIn) {
+            <li><p class="navbar-text">@userInfo.getEmail()</p></li>
+            <li><a href="@routes.Application.logout()">Logout</a></li>
+          } else {
+            <li><a href="@routes.Application.login()">Login</a></li>
+          }
         </ul>
       </div>
     </div>
