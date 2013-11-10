@@ -1,4 +1,5 @@
-@(contacts: List[Contact]) @Main("Home") {
+@(contacts: List[Contact], isLoggedIn: Boolean, userInfo: UserInfo) @Main("Home", isLoggedIn, userInfo) {
+@if(isLoggedIn){
 <div class="container">
   <table class="table table-bordered">
     <thead>
@@ -21,4 +22,4 @@
       }
   </table>
 </div>
-}
+} }

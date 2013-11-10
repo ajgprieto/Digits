@@ -1,5 +1,6 @@
 import models.Contact;
 import models.ContactDB;
+import models.UserInfoDB;
 import play.*;
 import views.formdata.ContactFormData;
 
@@ -25,6 +26,8 @@ public class Global extends GlobalSettings {
     ContactDB.add(new ContactFormData(contact2));
     ContactDB.add(new ContactFormData(contact3));
     ContactDB.add(new ContactFormData(contact4));
+    
+    UserInfoDB.addUserInfo("John Smith", "smith@example.com", "password");
   }
 
 }
