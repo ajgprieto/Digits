@@ -37,7 +37,8 @@ public class Application extends Controller {
   public static Result newContact(long id) {
     ContactFormData data = (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(id));
     Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
-    return ok(NewContact.render(formData, TelephoneTypes.getTypes(data.telephoneType), Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
+    return ok(NewContact.render(formData, TelephoneTypes.getTypes(data.telephoneType), Secured.isLoggedIn(ctx()),
+        Secured.getUserInfo(ctx())));
   }
 
   /**
@@ -50,14 +51,16 @@ public class Application extends Controller {
 
     if (formData.hasErrors()) {
       System.out.println("Errors Found");
-      return badRequest(NewContact.render(formData, TelephoneTypes.getTypes(), Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
+      return badRequest(NewContact.render(formData, TelephoneTypes.getTypes(), Secured.isLoggedIn(ctx()),
+          Secured.getUserInfo(ctx())));
     }
     else {
       ContactFormData data = formData.get();
       ContactDB.add(data);
       System.out.println("OK: " + data.firstName + " " + data.lastName + " " + data.telephone + " "
           + data.telephoneType);
-      return ok(NewContact.render(formData, TelephoneTypes.getTypes(), Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
+      return ok(NewContact.render(formData, TelephoneTypes.getTypes(), Secured.isLoggedIn(ctx()),
+          Secured.getUserInfo(ctx())));
     }
   }
 
