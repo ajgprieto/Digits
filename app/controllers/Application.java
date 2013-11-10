@@ -116,7 +116,7 @@ public class Application extends Controller {
    */
   @Security.Authenticated(Secured.class)
   public static Result profile() {
-    return ok(Profile.render("Profile", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
+    return ok(Index.render(ContactDB.getContacts(), Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
   }
 
 }
