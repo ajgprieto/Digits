@@ -35,9 +35,15 @@ public class Application extends Controller {
    * @return The NewContact.
    */
   public static Result newContact(long id) {
-    ContactFormData data = (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(id));
+    ContactFormData data;
+    if (id == 0) {
+      data = new ContactFormData();
+    }
+    else {
+      data = new ContactFormData(ContactDB.getContact(id));
+    }
     Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
-    return ok(NewContact.render(formData, TelephoneTypes.getTypes(data.telephoneType), Secured.isLoggedIn(ctx()),
+    return ok(NewContact.render(formData, TelephoneTypes.getTypes(), Secured.isLoggedIn(ctx()),
         Secured.getUserInfo(ctx())));
   }
 
@@ -57,7 +63,7 @@ public class Application extends Controller {
     else {
       ContactFormData data = formData.get();
       ContactDB.add(data);
-      System.out.println("OK: " + data.firstName + " " + data.lastName + " " + data.telephone + " "
+      System.out.println("OK: " + data.id + " " + data.firstName + " " + data.lastName + " " + data.telephone + " "
           + data.telephoneType);
       return ok(NewContact.render(formData, TelephoneTypes.getTypes(), Secured.isLoggedIn(ctx()),
           Secured.getUserInfo(ctx())));

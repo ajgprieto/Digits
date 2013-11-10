@@ -16,7 +16,7 @@ public class Global extends GlobalSettings {
    * Adds the four contacts to the database on startup.
    */
   public void onStart(Application app) {
-    long id = 0;
+    long id = 1;
     Contact contact1 = new Contact(id++, "Philip", "Johnson", "123-456-7890", "Home");
     Contact contact2 = new Contact(id++, "Jane", "Doe", "477-456-7890", "Work");
     Contact contact3 = new Contact(id++, "Justin", "Verlander", "999-456-8888", "Home");
