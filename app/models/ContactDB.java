@@ -26,15 +26,17 @@ public class ContactDB {
    */
   public static void add(ContactFormData formData) {
     Contact contact;
+    long id;
     if (formData.id == 0) {
-      long id = contacts.size() + 1;
+     id = contacts.size() + 1;
+      System.out.println(id);
       contact = new Contact(id, formData.firstName, formData.lastName, formData.telephone, formData.telephoneType);
       contacts.put(id, contact);
     }
     else {
       Contact newContact =
           new Contact(formData.id, formData.firstName, formData.lastName, formData.telephone, formData.telephoneType);
-      contacts.put(formData.id, newContact);
+      contacts.put(newContact.getID(), newContact);
     }
   }
 
