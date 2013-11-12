@@ -34,6 +34,7 @@ public class Application extends Controller {
    * 
    * @return The NewContact.
    */
+  @Security.Authenticated(Secured.class)
   public static Result newContact(long id) {
     ContactFormData data;
     if (id == 0) {
@@ -52,6 +53,7 @@ public class Application extends Controller {
    * 
    * @return contact info to the play console.
    */
+  @Security.Authenticated(Secured.class)
   public static Result postContact() {
     Form<ContactFormData> formData = Form.form(ContactFormData.class).bindFromRequest();
 
