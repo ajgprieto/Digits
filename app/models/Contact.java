@@ -101,10 +101,10 @@ public class Contact {
   /**
    * Sets the contact's id.
    * 
-   * @param val the contact's id
+   * @param id the contact's id
    */
-  public void setID(long val) {
-    this.id = val;
+  public void setID(long id) {
+    this.id = id;
   }
   
   /**
