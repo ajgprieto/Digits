@@ -1,15 +1,16 @@
-@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, loginForm: Form[views.formdata.LoginFormData], regForm: [views.formdata.RegistrationFormData]) 
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, loginForm: Form[views.formdata.LoginFormData], registrationForm: Form[views.formdata.RegistrationFormData])
 
-@importbootstrap3._ 
+@import bootstrap3._
 
 @Main(page, isLoggedIn, userInfo) {
-<div class="container">
-  <div class="row">
-    <div class="col-sm-6">@registrationform(routes.Application.newUser(), )</div>
-    <div class="col-sm-6">@loginform(routes.Application.postLogin(), loginForm("email"), loginForm("password"))</div>
-
-
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-2">
+        @loginform(routes.Application.postLogin(), loginForm("email"), loginForm("password"))
+      </div>
+      <div class="col-sm-4">
+        @registrationform(routes.Application.postRegistration(), registrationForm("name"), registrationForm("email"), registrationForm("password"))
+      </div>
+    </div>
   </div>
-
-</div>
 }

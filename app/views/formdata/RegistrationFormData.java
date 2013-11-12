@@ -14,14 +14,17 @@ import play.data.validation.ValidationError;
 public class RegistrationFormData {
 
   /**User's name. */
-  public String name;
+  public String name = "";
   /**User's email. */
-  public String email;
+  public String email = "";
   /**User's password.*/
-  public String password;
+  public String password = "";
+  
+  /**Empty constructor.*/
+  public RegistrationFormData() { }
   
   /**
-   * Creates a new registration form.
+   * Creates registrationformdata from user.
    * @param user the user
    */
   public RegistrationFormData(UserInfo user) {
@@ -38,13 +41,16 @@ public class RegistrationFormData {
     List<ValidationError> errors = new ArrayList<>();
     
     if (name == null || name.length() == 0) {
-      errors.add(new ValidationError(name, "Name cannot be empty."));
+      errors.add(new ValidationError("name", "Name cannot be empty."));
     }
     if (password == null || password.length() == 0) {
-      errors.add(new ValidationError(password, "Password cannot be empty."));
+      errors.add(new ValidationError("password", "Password cannot be empty."));
+    }
+    if (email == null || email.length() == 0) {
+      errors.add(new ValidationError("email", "Email cannot be empty."));
     }
     if (UserInfoDB.isUser(email)) {
-      errors.add(new ValidationError(email, "Already a registered user."));
+      errors.add(new ValidationError("email", "Already a registered user."));
     }
     
     return errors.isEmpty() ? errors : null;

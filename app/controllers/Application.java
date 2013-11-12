@@ -44,8 +44,7 @@ public class Application extends Controller {
   public static Result newContact(long id) {
     UserInfo ui = UserInfoDB.getUser(request().username());
     String user = ui.getEmail();
-    ContactFormData data =
-        (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(user, id));
+    ContactFormData data = (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(user, id));
     Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
     return ok(NewContact.render(formData, TelephoneTypes.getTypes(), Secured.isLoggedIn(ctx()),
         Secured.getUserInfo(ctx())));
@@ -84,7 +83,8 @@ public class Application extends Controller {
    */
   public static Result login() {
     Form<LoginFormData> formData = Form.form(LoginFormData.class);
-    return ok(Login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData));
+    Form<RegistrationFormData> rfd = Form.form(RegistrationFormData.class);
+    return ok(Login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, rfd));
   }
 
   /**
@@ -98,10 +98,11 @@ public class Application extends Controller {
 
     // Get the submitted form data from the request object, and run validation.
     Form<LoginFormData> formData = Form.form(LoginFormData.class).bindFromRequest();
+    Form<RegistrationFormData> rfd = Form.form(RegistrationFormData.class);
 
     if (formData.hasErrors()) {
       flash("error", "Login credentials not valid.");
-      return badRequest(Login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData));
+      return badRequest(Login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, rfd));
     }
     else {
       // email/password OK, so now we set the session variable and only go to authenticated pages.
@@ -131,27 +132,26 @@ public class Application extends Controller {
   public static Result profile() {
     return ok(Profile.render("Profile", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
   }
-  
+
   /**
    * Processes a registration form.
    * 
    * @return index if registration is complete.
    */
-  @Security.Authenticated(Secured.class)
-  public static Result newUser() {
-    
+  public static Result postRegistration() {
+
     Form<LoginFormData> loginForm = Form.form(LoginFormData.class);
     Form<RegistrationFormData> rfd = Form.form(RegistrationFormData.class).bindFromRequest();
-    
+
     if (rfd.hasErrors()) {
-      return badRequest(Login.render(Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), loginForm, rfd));
+      return badRequest(Login.render("Register", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), loginForm, rfd));
     }
     else {
       UserInfoDB.addUserInfo(rfd.get().name, rfd.get().email, rfd.get().password);
       session().clear();
       session("email", rfd.get().email);
       return redirect(routes.Application.index());
-      
+
     }
   }
 }
