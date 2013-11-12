@@ -1,5 +1,8 @@
-@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, loginForm: Form[views.formdata.LoginFormData]) @import
-bootstrap3._ @Main(page, isLoggedIn, userInfo) {
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, loginForm: Form[views.formdata.LoginFormData], regForm: [views.formdata.RegistrationFormData]) 
+
+@importbootstrap3._ 
+
+@Main(page, isLoggedIn, userInfo) {
 <div class="container">
   <div class="row">
     <div class="col-sm-6">@registrationform(routes.Application.newUser(), )</div>
