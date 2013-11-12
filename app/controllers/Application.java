@@ -9,6 +9,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import views.formdata.ContactFormData;
 import views.formdata.LoginFormData;
+import views.formdata.RegistrationFormData;
 import views.formdata.TelephoneTypes;
 import views.html.Index;
 import views.html.Login;
@@ -129,5 +130,28 @@ public class Application extends Controller {
   @Security.Authenticated(Secured.class)
   public static Result profile() {
     return ok(Profile.render("Profile", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
+  }
+  
+  /**
+   * Processes a registration form.
+   * 
+   * @return index if registration is complete.
+   */
+  @Security.Authenticated(Secured.class)
+  public static Result newUser() {
+    
+    Form<LoginFormData> loginForm = Form.form(LoginFormData.class);
+    Form<RegistrationFormData> rfd = Form.form(RegistrationFormData.class).bindFromRequest();
+    
+    if (rfd.hasErrors()) {
+      return badRequest(Login.render(Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), loginForm, rfd));
+    }
+    else {
+      UserInfoDB.addUserInfo(rfd.get().name, rfd.get().email, rfd.get().password);
+      session().clear();
+      session("email", rfd.get().email);
+      return redirect(routes.Application.index());
+      
+    }
   }
 }
