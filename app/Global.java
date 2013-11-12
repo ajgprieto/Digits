@@ -22,12 +22,14 @@ public class Global extends GlobalSettings {
     Contact contact3 = new Contact(3L, "Justin", "Verlander", "999-456-8888", "Home");
     Contact contact4 = new Contact(4L, "Gordie", "Howe", "654-456-2345", "Mobile");
     
-    ContactDB.add(new ContactFormData(contact1));
-    ContactDB.add(new ContactFormData(contact2));
-    ContactDB.add(new ContactFormData(contact3));
-    ContactDB.add(new ContactFormData(contact4));
-    
     UserInfoDB.addUserInfo("John Smith", "smith@example.com", "password");
+    UserInfoDB.addUserInfo("John Jacob", "jacob@example.com", "password");
+    
+    ContactDB.add("smith@example.com", new ContactFormData(contact1));
+    ContactDB.add("smith@example.com", new ContactFormData(contact2));
+    ContactDB.add("jacob@example.com", new ContactFormData(contact3));
+    ContactDB.add("jacob@example.com", new ContactFormData(contact4));
+       
   }
 
 }

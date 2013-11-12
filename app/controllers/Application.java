@@ -1,6 +1,8 @@
 package controllers;
 
 import models.ContactDB;
+import models.UserInfo;
+import models.UserInfoDB;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -23,8 +25,11 @@ public class Application extends Controller {
    * 
    * @return The Home.
    */
+  @Security.Authenticated(Secured.class)
   public static Result index() {
-    return ok(Index.render(ContactDB.getContacts(), Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
+    UserInfo ui = UserInfoDB.getUser(request().username());
+    String user = ui.getEmail();
+    return ok(Index.render(ContactDB.getContacts(user), Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
   }
 
   /**
@@ -36,7 +41,10 @@ public class Application extends Controller {
    */
   @Security.Authenticated(Secured.class)
   public static Result newContact(long id) {
-    ContactFormData data = (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(id));
+    UserInfo ui = UserInfoDB.getUser(request().username());
+    String user = ui.getEmail();
+    ContactFormData data =
+        (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(user, id));
     Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
     return ok(NewContact.render(formData, TelephoneTypes.getTypes(), Secured.isLoggedIn(ctx()),
         Secured.getUserInfo(ctx())));
@@ -57,8 +65,10 @@ public class Application extends Controller {
           Secured.getUserInfo(ctx())));
     }
     else {
+      UserInfo ui = UserInfoDB.getUser(request().username());
+      String user = ui.getEmail();
       ContactFormData data = formData.get();
-      ContactDB.add(data);
+      ContactDB.add(user, data);
       System.out.println("OK: " + data.id + " " + data.firstName + " " + data.lastName + " " + data.telephone + " "
           + data.telephoneType);
       return ok(NewContact.render(formData, TelephoneTypes.getTypes(), Secured.isLoggedIn(ctx()),
