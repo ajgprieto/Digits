@@ -26,9 +26,8 @@ public class ContactDB {
    */
   public static void add(ContactFormData formData) {
     Contact contact;
-    long id;
     if (formData.id == 0) {
-     id = contacts.size() + 1;
+     long id = contacts.size() + 1;
       System.out.println(id);
       contact = new Contact(id, formData.firstName, formData.lastName, formData.telephone, formData.telephoneType);
       contacts.put(id, contact);
@@ -36,7 +35,7 @@ public class ContactDB {
     else {
       Contact newContact =
           new Contact(formData.id, formData.firstName, formData.lastName, formData.telephone, formData.telephoneType);
-      contacts.put(newContact.getID(), newContact);
+      contacts.put(formData.id, newContact);
     }
   }
 

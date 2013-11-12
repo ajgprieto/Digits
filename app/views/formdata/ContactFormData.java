@@ -25,7 +25,7 @@ public class ContactFormData {
   public String telephone = "";
   
   /**The contact's id.*/
-  public long id = 0;
+  public long id;
   
   /**The telephone type.*/
   public String telephoneType = "";

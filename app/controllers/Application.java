@@ -36,13 +36,7 @@ public class Application extends Controller {
    */
   @Security.Authenticated(Secured.class)
   public static Result newContact(long id) {
-    ContactFormData data;
-    if (id == 0) {
-      data = new ContactFormData();
-    }
-    else {
-      data = new ContactFormData(ContactDB.getContact(id));
-    }
+    ContactFormData data = (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(id));
     Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
     return ok(NewContact.render(formData, TelephoneTypes.getTypes(), Secured.isLoggedIn(ctx()),
         Secured.getUserInfo(ctx())));
