@@ -5,5 +5,11 @@
 @Main(page, isLoggedIn, userInfo) {
    <div class="container">
      @loginform(routes.Application.postLogin(), loginForm("email"), loginForm("password"))
+     
+     @if(!models.UserInfoDB.hasAdmin()) {
+     <div>
+        <p>Admin Credentials Undefined!</p>
+        </div>
+     }
    </div>
 }
