@@ -1,17 +1,34 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import play.db.ebean.Model;
+
 /**
- * A simple representation of a user. 
+ * A simple representation of a user.
+ * 
  * @author Philip Johnson
  */
-public class UserInfo {
- 
+@Entity
+public class UserInfo extends Model {
+
+  private static final long serialVersionUID = 1L;
+  @Id
+  private Long id;
   private String name;
   private String email;
   private String password;
-  
+  private boolean admin = false;
+
+  @OneToMany(mappedBy = "userInfo")
+  private List<Contact> contacts = new ArrayList<>();
+
   /**
    * Creates a new UserInfo instance.
+   * 
    * @param name The name.
    * @param email The email.
    * @param password The password.
@@ -21,42 +38,80 @@ public class UserInfo {
     this.email = email;
     this.password = password;
   }
-  
+
   /**
    * @return the name
    */
   public String getName() {
     return name;
   }
+
   /**
    * @param name the name to set
    */
   public void setName(String name) {
     this.name = name;
   }
+
   /**
    * @return the email
    */
   public String getEmail() {
     return email;
   }
+
   /**
    * @param email the email to set
    */
   public void setEmail(String email) {
     this.email = email;
   }
+
   /**
    * @return the password
    */
   public String getPassword() {
     return password;
   }
+
   /**
    * @param password the password to set
    */
   public void setPassword(String password) {
     this.password = password;
   }
+  
+  /**
+   * Add contact to contacts.
+   * @param contact the contact to be added
+   */
+  public void addContact(Contact contact) {
+    contacts.add(contact);
+  }
+  
+  /**
+   * The EBean ORM finder method for database queries on ID.
+   * @return The finder method for Users.
+   */
+  public static Finder<Long, UserInfo> find() {
+    return new Finder<Long, UserInfo>(Long.class, UserInfo.class);
+  }
+
+  /**
+   * Returns the list of contacts associated with the user.
+   * @return the list of contacts
+   */
+  public List<Contact> getContacts() {
+   return contacts;
+  }
+
+  /**
+   * Sets the admin.
+   * @param admin true if the admin has been set
+   */
+  public void setAdmin(boolean admin) {
+    this.admin = admin;
+  }
+
 
 }

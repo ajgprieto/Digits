@@ -1,34 +1,43 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import play.db.ebean.Model;
+
 /**
  * Creates a model of a Contact.
  */
-public class Contact {
+@Entity
+public class Contact extends Model {
 
+  private static final long serialVersionUID = 1L;
+
+  @Id
+  private Long id;
   /** The first name. */
   private String firstName;
   /** The last name. */
   private String lastName;
   /** The telephone number. */
   private String telephone;
-  /** Contact's id. */
-  private long id;
-  /**The telephone type.*/
+  /** The telephone type. */
   private String telephoneType;
+
+  @ManyToOne
+  private UserInfo userInfo;
 
   /**
    * public Contact(String first, String last, String phNumber
    * 
    * Creates a Contact from the given data.
    * 
-   * @param id the id of the contact
    * @param first the first name
    * @param last the last name
    * @param phNumber the phone number
    * @param telephoneType the telephone type
    */
-  public Contact(long id, String first, String last, String phNumber, String telephoneType) {
-    this.id = id;
+  public Contact(String first, String last, String phNumber, String telephoneType) {
     this.firstName = first;
     this.lastName = last;
     this.telephone = phNumber;
@@ -106,7 +115,7 @@ public class Contact {
   public void setID(long id) {
     this.id = id;
   }
-  
+
   /**
    * Returns the telephone type.
    * 
@@ -115,7 +124,7 @@ public class Contact {
   public String getTelephoneType() {
     return telephoneType;
   }
-  
+
   /**
    * Sets the telephone type.
    * 
@@ -123,5 +132,32 @@ public class Contact {
    */
   public void setTelephoneType(String telephoneType) {
     this.telephoneType = telephoneType;
+  }
+
+  /**
+   * The EBean ORM finder method for database queries on ID.
+   * 
+   * @return The finder method for Contacts.
+   */
+  public static Finder<Long, Contact> find() {
+    return new Finder<Long, Contact>(Long.class, Contact.class);
+  }
+
+  /**
+   * Sets the userInfo to userInfo.
+   * 
+   * @param userInfo the userInfo
+   */
+  public void setUserInfo(UserInfo userInfo) {
+    this.userInfo = userInfo;
+  }
+
+  /**
+   * Returns the userinfo.
+   * 
+   * @return the userinfo
+   */
+  public UserInfo getUserInfo() {
+    return userInfo;
   }
 }
