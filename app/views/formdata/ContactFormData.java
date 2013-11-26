@@ -42,8 +42,7 @@ public class ContactFormData {
    * @param contact The contact with information that creates the ContactFormData.
    */
   public ContactFormData(Contact contact) {
-    this.id = contact.getID();
-    //this.firstName = contact.getFirstName();
+    this.firstName = contact.getFirstName();
     this.lastName = contact.getLastName();
     this.telephone = contact.getNumber();
     this.telephoneType = contact.getTelephoneType();

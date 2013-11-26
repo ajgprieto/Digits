@@ -21,7 +21,7 @@ public class Contact extends Model {
   private String telephone;
   /** Contact's id. */
   @Id
-  private long id;
+  private Long id;
   /**The telephone type.*/
   private String telephoneType;
   

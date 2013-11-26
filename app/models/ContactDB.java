@@ -20,11 +20,11 @@ public class ContactDB {
    * @param formData the contact to be added
    */
   public static void add(String user, ContactFormData formData) {
-    Contact contact;
+
     boolean isNewContact = (formData.id == -1);
 
     if (isNewContact) {
-      contact = new Contact(formData.firstName, formData.lastName, formData.telephone, formData.telephoneType);
+      Contact contact = new Contact(formData.firstName, formData.lastName, formData.telephone, formData.telephoneType);
       UserInfo userInfo = UserInfo.find().where().eq("email", user).findUnique();
       if (userInfo == null) {
         throw new RuntimeException("User not found: " + user);
@@ -35,7 +35,8 @@ public class ContactDB {
       userInfo.save();
     }
     else {
-      contact = Contact.find().byId(formData.id);
+      Contact contact = Contact.find().byId(formData.id);
+
       System.out.println(formData.firstName);
       contact.setFirstName(formData.firstName);
       contact.setLastName(formData.lastName);
