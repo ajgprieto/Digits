@@ -25,7 +25,7 @@ public class ContactFormData {
   public String telephone = "";
   
   /**The contact's id.*/
-  public long id;
+  public long id = -1;
   
   /**The telephone type.*/
   public String telephoneType = "";
@@ -43,7 +43,7 @@ public class ContactFormData {
    */
   public ContactFormData(Contact contact) {
     this.id = contact.getID();
-    this.firstName = contact.getFirstName();
+    //this.firstName = contact.getFirstName();
     this.lastName = contact.getLastName();
     this.telephone = contact.getNumber();
     this.telephoneType = contact.getTelephoneType();

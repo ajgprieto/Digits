@@ -43,7 +43,7 @@ public class Application extends Controller {
   public static Result newContact(long id) {
     UserInfo ui = UserInfoDB.getUser(request().username());
     String user = ui.getEmail();
-    ContactFormData data = (id == 0) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(user, id));
+    ContactFormData data = (id == -1) ? new ContactFormData() : new ContactFormData(ContactDB.getContact(user, id));
     Form<ContactFormData> formData = Form.form(ContactFormData.class).fill(data);
     return ok(NewContact.render(formData, TelephoneTypes.getTypes(), Secured.isLoggedIn(ctx()),
         Secured.getUserInfo(ctx())));
